@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.Bar {
+  background-color: blue;
+  width: 15px;
+  margin: 2px;
+  bottom: 0;
+  position: absolute;
+}
