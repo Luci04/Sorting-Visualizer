@@ -9,8 +9,8 @@ const SECONDARY_COLOR = 'red';
 class Chart extends Component {
     constructor(props) {
         super(props);
-        this.state = { array: [], length: 80, Speed: 10 };
         this.Bubble_Sort = this.Bubble_Sort.bind(this);
+        this.state = { array: [], length: 66, Speed: 50 };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.handleDecrease = this.handleDecrease.bind(this);
@@ -49,7 +49,7 @@ class Chart extends Component {
         let x = this.state.Speed;
         if (x > 1) {
             this.setState(prev => ({
-                Speed: prev.Speed - 1
+                Speed: prev.Speed - 20
             }))
         } else {
             alert("Not Possible")
@@ -59,9 +59,9 @@ class Chart extends Component {
 
     handleDecrease() {
         let x = this.state.Speed;
-        if (x < 15) {
+        if (x < 110) {
             this.setState(prev => ({
-                Speed: prev.Speed + 1
+                Speed: prev.Speed + 20
             }))
         } else {
             alert("Not Possible")
@@ -89,12 +89,15 @@ class Chart extends Component {
             <div className="main">
 
                 <div className="buttons" >
-                    <button title="Generates a new random array" onClick={this.resetArray}>
+                    <button title="Generates a new random array" className="button" onClick={this.resetArray}>
                         Reset
                     </button>
-                    <button onClick={this.Bubble_Sort}>Bubble-Sort</button>
-                    <button onClick={this.handleIncrease}>Speed +</button>
-                    <button onClick={this.handleDecrease}>Speed -</button>
+                    <button className="button" onClick={this.Bubble_Sort}>Bubble-Sort</button>
+                    <button className="button" onClick={this.Bubble_Sort}>Merge Sort</button>
+                    <button className="button" onClick={this.Bubble_Sort}>Selection Sort</button>
+                    <button className="button" onClick={this.Bubble_Sort}>Quick Sort</button>
+                    <button className="button" onClick={this.handleIncrease}>Speed +</button>
+                    <button className="button" onClick={this.handleDecrease}>Speed -</button>
                 </div>
                 <div className="Chart">
                     {Object}
