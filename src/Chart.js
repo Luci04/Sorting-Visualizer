@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Bar from './Bar';
 import "./Chart.css";
 import { BubbleSort } from './SortingAlgorithms/BubbleSort';
+import { Selection } from './SortingAlgorithms/SelectionSort';
+import { Insertion } from './SortingAlgorithms/InsertionSort';
 
 const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
@@ -10,6 +12,8 @@ class Chart extends Component {
     constructor(props) {
         super(props);
         this.Bubble_Sort = this.Bubble_Sort.bind(this);
+        this.Selction_Sort = this.Selction_Sort.bind(this);
+        this.Insertion_Sort = this.Selction_Sort.bind(this);
         this.state = { array: [], length: 66, Speed: 50 };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
@@ -44,6 +48,62 @@ class Chart extends Component {
         }
     }
 
+    Insertion_Sort() {
+        const [animations] = Insertion(this.state.array);
+        for (let i = 0; i < animations.length; i++) {
+            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+            const arrayBars = document.getElementsByClassName('Bar');
+            if (isColorChange === true) {
+                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                const barOneStyle = arrayBars[barOneIndex].style;
+                const barTwoStyle = arrayBars[barTwoIndex].style;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * this.state.Speed);
+            }
+            else {
+                const [swap, barIndex, newHeight] = animations[i];
+                if (barIndex === -1) {
+                    continue;
+                }
+                const barStyle = arrayBars[barIndex].style;
+                setTimeout(() => {
+                    barStyle.height = `${newHeight}px`;
+                }, i * this.state.Speed);
+            }
+        }
+    }
+
+    Selction_Sort() {
+        const [animations] = Selection(this.state.array);
+        for (let i = 0; i < animations.length; i++) {
+            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+            const arrayBars = document.getElementsByClassName('Bar');
+            if (isColorChange === true) {
+                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                const barOneStyle = arrayBars[barOneIndex].style;
+                const barTwoStyle = arrayBars[barTwoIndex].style;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * this.state.Speed);
+            }
+            else {
+                const [swap, barIndex, newHeight] = animations[i];
+                if (barIndex === -1) {
+                    continue;
+                }
+                const barStyle = arrayBars[barIndex].style;
+                setTimeout(() => {
+                    barStyle.height = `${newHeight}px`;
+                }, i * this.state.Speed);
+            }
+        }
+    }
+
     handleIncrease() {
 
         let x = this.state.Speed;
@@ -52,7 +112,7 @@ class Chart extends Component {
                 Speed: prev.Speed - 20
             }))
         } else {
-            alert("Not Possible")
+            alert("Cannot get Faster than this")
         }
 
     }
@@ -64,7 +124,7 @@ class Chart extends Component {
                 Speed: prev.Speed + 20
             }))
         } else {
-            alert("Not Possible")
+            alert("Sry Slower than this is not possible");
         }
     }
 
@@ -93,9 +153,8 @@ class Chart extends Component {
                         Reset
                     </button>
                     <button className="button" onClick={this.Bubble_Sort}>Bubble-Sort</button>
-                    <button className="button" onClick={this.Bubble_Sort}>Merge Sort</button>
-                    <button className="button" onClick={this.Bubble_Sort}>Selection Sort</button>
-                    <button className="button" onClick={this.Bubble_Sort}>Quick Sort</button>
+                    <button className="button" onClick={this.Insertion_Sort}>Insertion Sort</button>
+                    <button className="button" onClick={this.Selction_Sort}>Selection Sort</button>
                     <button className="button" onClick={this.handleIncrease}>Speed +</button>
                     <button className="button" onClick={this.handleDecrease}>Speed -</button>
                 </div>
