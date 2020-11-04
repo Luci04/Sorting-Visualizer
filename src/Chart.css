@@ -34,6 +34,18 @@ button:hover {
   color: white;
 }
 
+button:disabled {
+  background-color: grey;
+  color: black;
+  overflow: hidden;
+  width: 150px;
+  text-transform: uppercase;
+  padding: 20px;
+  border: 4px solid grey;
+  border-radius: 2px;
+  margin: 0;
+}
+
 button:focus {
   border: 4px solid #20bf6b;
 }

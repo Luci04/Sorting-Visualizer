@@ -14,15 +14,19 @@ class Chart extends Component {
         this.Bubble_Sort = this.Bubble_Sort.bind(this);
         this.Selction_Sort = this.Selction_Sort.bind(this);
         this.Insertion_Sort = this.Selction_Sort.bind(this);
-        this.state = { array: [], length: 66, Speed: 50 };
+        this.state = { array: [], length: 66, Speed: 50, sorting: false };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.handleDecrease = this.handleDecrease.bind(this);
     }
 
     Bubble_Sort() {
+
+        this.setState({ sorting: true });
+
         const [animations] = BubbleSort(this.state.array);
-        for (let i = 0; i < animations.length; i++) {
+        let i;
+        for (i = 0; i < animations.length; i++) {
             const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
             const arrayBars = document.getElementsByClassName('Bar');
             if (isColorChange === true) {
@@ -46,11 +50,21 @@ class Chart extends Component {
                 }, i * this.state.Speed);
             }
         }
+
+        setTimeout(() => {
+            this.setState({ sorting: false });
+        }, i * this.state.Speed);
+
+
     }
 
     Insertion_Sort() {
+
+        this.setState({ sorting: true });
+
+        let i;
         const [animations] = Insertion(this.state.array);
-        for (let i = 0; i < animations.length; i++) {
+        for (i = 0; i < animations.length; i++) {
             const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
             const arrayBars = document.getElementsByClassName('Bar');
             if (isColorChange === true) {
@@ -74,11 +88,22 @@ class Chart extends Component {
                 }, i * this.state.Speed);
             }
         }
+
+        setTimeout(() => {
+            this.setState({ sorting: false });
+        }, i * this.state.Speed);
+
+
     }
 
     Selction_Sort() {
+
+        this.setState({ sorting: true });
+
         const [animations] = Selection(this.state.array);
-        for (let i = 0; i < animations.length; i++) {
+        let i;
+
+        for (i = 0; i < animations.length; i++) {
             const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
             const arrayBars = document.getElementsByClassName('Bar');
             if (isColorChange === true) {
@@ -102,6 +127,12 @@ class Chart extends Component {
                 }, i * this.state.Speed);
             }
         }
+
+        setTimeout(() => {
+            this.setState({ sorting: false });
+        }, i * this.state.Speed);
+
+
     }
 
     handleIncrease() {
@@ -139,29 +170,30 @@ class Chart extends Component {
 
     componentDidMount() {
         this.resetArray();
+        console.log(this.state.sorting);
+
     }
 
     render() {
+
         let Object = this.state.array.map((e, index) => <div className="array-bar"><Bar height={e} key={index} left={index * 20} /></div>)
 
-
         return (
-            <div className="main">
-
+            <div className="main" >
                 <div className="buttons" >
-                    <button title="Generates a new random array" className="button" onClick={this.resetArray}>
+                    <button disabled={this.state.sorting} title="Generates a new random array" className="button" onClick={this.resetArray}>
                         Reset
                     </button>
-                    <button className="button" onClick={this.Bubble_Sort}>Bubble-Sort</button>
-                    <button className="button" onClick={this.Insertion_Sort}>Insertion Sort</button>
-                    <button className="button" onClick={this.Selction_Sort}>Selection Sort</button>
-                    <button className="button" onClick={this.handleIncrease}>Speed +</button>
-                    <button className="button" onClick={this.handleDecrease}>Speed -</button>
+                    <button disabled={this.state.sorting} className="button" onClick={this.Bubble_Sort}>Bubble-Sort</button>
+                    <button disabled={this.state.sorting} className="button" onClick={this.Insertion_Sort}>Insertion Sort</button>
+                    <button disabled={this.state.sorting} className="button" onClick={this.Selction_Sort}>Selection Sort</button>
+                    <button disabled={this.state.sorting} className="button" onClick={this.handleIncrease}>Speed +</button>
+                    <button disabled={this.state.sorting} className="button" onClick={this.handleDecrease}>Speed -</button>
                 </div>
                 <div className="Chart">
                     {Object}
                 </div >
-            </div>
+            </div >
 
         )
     }
