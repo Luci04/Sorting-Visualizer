@@ -16,7 +16,7 @@ class Chart extends Component {
         this.Selction_Sort = this.Selction_Sort.bind(this);
         this.Insertion_Sort = this.Insertion_Sort.bind(this);
         this.Merge_Sort = this.Merge_Sort.bind(this);
-        this.state = { array: [], length: 66, Speed: 50, sorting: false };
+        this.state = { array: [], length: 70, Speed: 50, sorting: false };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.handleDecrease = this.handleDecrease.bind(this);
@@ -27,7 +27,6 @@ class Chart extends Component {
         this.setState({ sorting: true });
 
         const [animations, sortedArr] = BubbleSort(this.state.array);
-        this.setState({ array: sortedArr });
 
         if (this.arraysAreEqual(sortedArr, this.state.array)) {
             alert("Already Sorted");
@@ -61,6 +60,7 @@ class Chart extends Component {
 
             setTimeout(() => {
                 this.setState({ sorting: false });
+                this.setState({ array: sortedArr });
             }, i * this.state.Speed);
 
 
@@ -73,8 +73,6 @@ class Chart extends Component {
 
         const [animations, sortedArr] = Insertion(this.state.array);
 
-        this.setState({ array: sortedArr });
-
         if (this.arraysAreEqual(sortedArr, this.state.array)) {
             alert("Already Sorted");
             this.setState({ sorting: false });
@@ -108,6 +106,7 @@ class Chart extends Component {
 
             setTimeout(() => {
                 this.setState({ sorting: false });
+                this.setState({ array: sortedArr });
             }, i * this.state.Speed);
 
 
@@ -120,14 +119,10 @@ class Chart extends Component {
 
         const [animations, sortedArr] = Merge(this.state.array);
 
-        this.setState({ array: sortedArr });
-
         if (this.arraysAreEqual(sortedArr, this.state.array)) {
             alert("Already Sorted");
             this.setState({ sorting: false });
         } else {
-
-
             let i;
             for (i = 0; i < animations.length; i++) {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
@@ -156,9 +151,11 @@ class Chart extends Component {
 
             setTimeout(() => {
                 this.setState({ sorting: false });
+                this.setState({ array: sortedArr });
             }, i * this.state.Speed);
 
         }
+
     }
 
     arraysAreEqual(firstArray, secondArray) {
@@ -179,15 +176,11 @@ class Chart extends Component {
 
         const [animations, sortedArr] = Selection(this.state.array);
 
-        this.setState({ array: sortedArr });
-
         if (this.arraysAreEqual(sortedArr, this.state.array)) {
             alert("Already Sorted");
             this.setState({ sorting: false });
         } else {
-
             let i;
-
             for (i = 0; i < animations.length; i++) {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
                 const arrayBars = document.getElementsByClassName('Bar');
@@ -215,7 +208,9 @@ class Chart extends Component {
 
             setTimeout(() => {
                 this.setState({ sorting: false });
+                this.setState({ array: sortedArr });
             }, i * this.state.Speed);
+
         }
     }
 
@@ -254,8 +249,6 @@ class Chart extends Component {
 
     componentDidMount() {
         this.resetArray();
-        console.log(this.state.sorting);
-
     }
 
     render() {

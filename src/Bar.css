@@ -4,6 +4,7 @@
 }
 
 .Bar {
+  display: inline-block;
   background-color: blue;
   width: 15px;
   margin: 2px;

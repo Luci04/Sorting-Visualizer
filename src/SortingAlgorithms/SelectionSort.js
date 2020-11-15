@@ -1,24 +1,25 @@
 export function Selection(array) {
     let animations = [];
     let auxillaryArray = array.slice();
-    selection(auxillaryArray, animations);
+    selectionSort(auxillaryArray, animations);
     array = auxillaryArray;
     return [animations, array];
 }
 
-function selection(auxillaryArray, animations) {
+function selectionSort(auxillaryArray, animations) {
     const N = auxillaryArray.length;
-    for (let i = 0; i < N - i; i++) {
-        let minIndex = i;
+    for (let i = 0; i < N - 1; i++) {
+        let minIndex = i; //Finding minimum element in unsorted array
         for (let j = i + 1; j < N; j++) {
             animations.push(["comparision1", j, minIndex]);
             animations.push(["comparision2", j, minIndex]);
-            if (auxillaryArray[j] < auxillaryArray[minIndex])
+            if (auxillaryArray[j] < auxillaryArray[minIndex]) {
                 minIndex = j;
+            }
         }
         animations.push(["swap", minIndex, auxillaryArray[i]]);
         animations.push(["swap", i, auxillaryArray[minIndex]]);
-
+        // Swap the found minimum element with the first element
         swap(auxillaryArray, minIndex, i);
     }
 }
@@ -29,3 +30,14 @@ function swap(auxillaryArray, firstIndex, secondIndex) {
     auxillaryArray[secondIndex] = temp;
 }
 
+function arraysAreEqual(firstArray, secondArray) {
+    if (firstArray.length !== secondArray.length) {
+        return false;
+    }
+    for (let i = 0; i < firstArray.length; i++) {
+        if (firstArray[i] !== secondArray[i]) {
+            return false;
+        }
+    }
+    return true;
+}
