@@ -51,7 +51,7 @@ button:disabled {
 .Chart {
   bottom: 50px;
   height: 100%;
-  width: 70%;
+  width: 75%;
   margin-left: 20px;
   position: relative;
   overflow: auto;

@@ -26,152 +26,197 @@ class Chart extends Component {
 
         this.setState({ sorting: true });
 
-        const [animations] = BubbleSort(this.state.array);
-        let i;
-        for (i = 0; i < animations.length; i++) {
-            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
-            const arrayBars = document.getElementsByClassName('Bar');
-            if (isColorChange === true) {
-                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-                const [comparision, barOneIndex, barTwoIndex] = animations[i];
-                const barOneStyle = arrayBars[barOneIndex].style;
-                const barTwoStyle = arrayBars[barTwoIndex].style;
-                setTimeout(() => {
-                    barOneStyle.backgroundColor = color;
-                    barTwoStyle.backgroundColor = color;
-                }, i * this.state.Speed);
-            }
-            else {
-                const [swap, barIndex, newHeight] = animations[i];
-                if (barIndex === -1) {
-                    continue;
-                }
-                const barStyle = arrayBars[barIndex].style;
-                setTimeout(() => {
-                    barStyle.height = `${newHeight}px`;
-                }, i * this.state.Speed);
-            }
-        }
+        const [animations, sortedArr] = BubbleSort(this.state.array);
+        this.setState({ array: sortedArr });
 
-        setTimeout(() => {
+        if (this.arraysAreEqual(sortedArr, this.state.array)) {
+            alert("Already Sorted");
             this.setState({ sorting: false });
-        }, i * this.state.Speed);
+        } else {
+            let i;
+            for (i = 0; i < animations.length; i++) {
+                const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+                const arrayBars = document.getElementsByClassName('Bar');
+                if (isColorChange === true) {
+                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                    const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const barOneStyle = arrayBars[barOneIndex].style;
+                    const barTwoStyle = arrayBars[barTwoIndex].style;
+                    setTimeout(() => {
+                        barOneStyle.backgroundColor = color;
+                        barTwoStyle.backgroundColor = color;
+                    }, i * this.state.Speed);
+                }
+                else {
+                    const [swap, barIndex, newHeight] = animations[i];
+                    if (barIndex === -1) {
+                        continue;
+                    }
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.height = `${newHeight}px`;
+                    }, i * this.state.Speed);
+                }
+            }
+
+            setTimeout(() => {
+                this.setState({ sorting: false });
+            }, i * this.state.Speed);
 
 
+        }
     }
 
     Insertion_Sort() {
 
         this.setState({ sorting: true });
 
-        let i;
-        const [animations] = Insertion(this.state.array);
-        for (i = 0; i < animations.length; i++) {
-            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
-            const arrayBars = document.getElementsByClassName('Bar');
-            if (isColorChange === true) {
-                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-                const [comparision, barOneIndex, barTwoIndex] = animations[i];
-                const barOneStyle = arrayBars[barOneIndex].style;
-                const barTwoStyle = arrayBars[barTwoIndex].style;
-                setTimeout(() => {
-                    barOneStyle.backgroundColor = color;
-                    barTwoStyle.backgroundColor = color;
-                }, i * this.state.Speed);
-            }
-            else {
-                const [swap, barIndex, newHeight] = animations[i];
-                if (barIndex === -1) {
-                    continue;
-                }
-                const barStyle = arrayBars[barIndex].style;
-                setTimeout(() => {
-                    barStyle.height = `${newHeight}px`;
-                }, i * this.state.Speed);
-            }
-        }
+        const [animations, sortedArr] = Insertion(this.state.array);
 
-        setTimeout(() => {
+        this.setState({ array: sortedArr });
+
+        if (this.arraysAreEqual(sortedArr, this.state.array)) {
+            alert("Already Sorted");
             this.setState({ sorting: false });
-        }, i * this.state.Speed);
+        } else {
+
+            let i;
+            for (i = 0; i < animations.length; i++) {
+                const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+                const arrayBars = document.getElementsByClassName('Bar');
+                if (isColorChange === true) {
+                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                    const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const barOneStyle = arrayBars[barOneIndex].style;
+                    const barTwoStyle = arrayBars[barTwoIndex].style;
+                    setTimeout(() => {
+                        barOneStyle.backgroundColor = color;
+                        barTwoStyle.backgroundColor = color;
+                    }, i * this.state.Speed);
+                }
+                else {
+                    const [swap, barIndex, newHeight] = animations[i];
+                    if (barIndex === -1) {
+                        continue;
+                    }
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.height = `${newHeight}px`;
+                    }, i * this.state.Speed);
+                }
+            }
+
+            setTimeout(() => {
+                this.setState({ sorting: false });
+            }, i * this.state.Speed);
 
 
+        }
     }
 
     Merge_Sort() {
 
         this.setState({ sorting: true });
 
-        let i;
-        const [animations] = Merge(this.state.array);
-        for (i = 0; i < animations.length; i++) {
-            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
-            const arrayBars = document.getElementsByClassName('Bar');
-            if (isColorChange === true) {
-                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-                const [comparision, barOneIndex, barTwoIndex] = animations[i];
-                const barOneStyle = arrayBars[barOneIndex].style;
-                const barTwoStyle = arrayBars[barTwoIndex].style;
-                setTimeout(() => {
-                    barOneStyle.backgroundColor = color;
-                    barTwoStyle.backgroundColor = color;
-                }, i * this.state.Speed);
-            }
-            else {
-                const [swap, barIndex, newHeight] = animations[i];
-                if (barIndex === -1) {
-                    continue;
+        const [animations, sortedArr] = Merge(this.state.array);
+
+        this.setState({ array: sortedArr });
+
+        if (this.arraysAreEqual(sortedArr, this.state.array)) {
+            alert("Already Sorted");
+            this.setState({ sorting: false });
+        } else {
+
+
+            let i;
+            for (i = 0; i < animations.length; i++) {
+                const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+                const arrayBars = document.getElementsByClassName('Bar');
+                if (isColorChange === true) {
+                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                    const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const barOneStyle = arrayBars[barOneIndex].style;
+                    const barTwoStyle = arrayBars[barTwoIndex].style;
+                    setTimeout(() => {
+                        barOneStyle.backgroundColor = color;
+                        barTwoStyle.backgroundColor = color;
+                    }, i * this.state.Speed);
                 }
-                const barStyle = arrayBars[barIndex].style;
-                setTimeout(() => {
-                    barStyle.height = `${newHeight}px`;
-                }, i * this.state.Speed);
+                else {
+                    const [swap, barIndex, newHeight] = animations[i];
+                    if (barIndex === -1) {
+                        continue;
+                    }
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.height = `${newHeight}px`;
+                    }, i * this.state.Speed);
+                }
+            }
+
+            setTimeout(() => {
+                this.setState({ sorting: false });
+            }, i * this.state.Speed);
+
+        }
+    }
+
+    arraysAreEqual(firstArray, secondArray) {
+        if (firstArray.length !== secondArray.length) {
+            return false;
+        }
+        for (let i = 0; i < firstArray.length; i++) {
+            if (firstArray[i] !== secondArray[i]) {
+                return false;
             }
         }
-
-        setTimeout(() => {
-            this.setState({ sorting: false });
-        }, i * this.state.Speed);
-
+        return true;
     }
 
     Selction_Sort() {
 
         this.setState({ sorting: true });
 
-        const [animations] = Selection(this.state.array);
-        let i;
+        const [animations, sortedArr] = Selection(this.state.array);
 
-        for (i = 0; i < animations.length; i++) {
-            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
-            const arrayBars = document.getElementsByClassName('Bar');
-            if (isColorChange === true) {
-                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
-                const [comparision, barOneIndex, barTwoIndex] = animations[i];
-                const barOneStyle = arrayBars[barOneIndex].style;
-                const barTwoStyle = arrayBars[barTwoIndex].style;
-                setTimeout(() => {
-                    barOneStyle.backgroundColor = color;
-                    barTwoStyle.backgroundColor = color;
-                }, i * this.state.Speed);
-            }
-            else {
-                const [swap, barIndex, newHeight] = animations[i];
-                if (barIndex === -1) {
-                    continue;
-                }
-                const barStyle = arrayBars[barIndex].style;
-                setTimeout(() => {
-                    barStyle.height = `${newHeight}px`;
-                }, i * this.state.Speed);
-            }
-        }
+        this.setState({ array: sortedArr });
 
-        setTimeout(() => {
+        if (this.arraysAreEqual(sortedArr, this.state.array)) {
+            alert("Already Sorted");
             this.setState({ sorting: false });
-        }, i * this.state.Speed);
+        } else {
 
+            let i;
 
+            for (i = 0; i < animations.length; i++) {
+                const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+                const arrayBars = document.getElementsByClassName('Bar');
+                if (isColorChange === true) {
+                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                    const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const barOneStyle = arrayBars[barOneIndex].style;
+                    const barTwoStyle = arrayBars[barTwoIndex].style;
+                    setTimeout(() => {
+                        barOneStyle.backgroundColor = color;
+                        barTwoStyle.backgroundColor = color;
+                    }, i * this.state.Speed);
+                }
+                else {
+                    const [swap, barIndex, newHeight] = animations[i];
+                    if (barIndex === -1) {
+                        continue;
+                    }
+                    const barStyle = arrayBars[barIndex].style;
+                    setTimeout(() => {
+                        barStyle.height = `${newHeight}px`;
+                    }, i * this.state.Speed);
+                }
+            }
+
+            setTimeout(() => {
+                this.setState({ sorting: false });
+            }, i * this.state.Speed);
+        }
     }
 
     handleIncrease() {
