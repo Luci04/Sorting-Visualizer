@@ -29,7 +29,8 @@ button {
 }
 
 button:hover,
-button:focus {
+button:focus,
+button:active {
   background-color: #20bf6b;
   border: 4px solid #20bf6b;
   color: white;

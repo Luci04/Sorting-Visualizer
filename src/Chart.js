@@ -4,6 +4,7 @@ import "./Chart.css";
 import { BubbleSort } from './SortingAlgorithms/BubbleSort';
 import { Selection } from './SortingAlgorithms/SelectionSort';
 import { Insertion } from './SortingAlgorithms/InsertionSort';
+import { Merge } from './SortingAlgorithms/MergeSort';
 
 const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
@@ -13,7 +14,8 @@ class Chart extends Component {
         super(props);
         this.Bubble_Sort = this.Bubble_Sort.bind(this);
         this.Selction_Sort = this.Selction_Sort.bind(this);
-        this.Insertion_Sort = this.Selction_Sort.bind(this);
+        this.Insertion_Sort = this.Insertion_Sort.bind(this);
+        this.Merge_Sort = this.Merge_Sort.bind(this);
         this.state = { array: [], length: 66, Speed: 50, sorting: false };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
@@ -93,6 +95,43 @@ class Chart extends Component {
             this.setState({ sorting: false });
         }, i * this.state.Speed);
 
+
+    }
+
+    Merge_Sort() {
+
+        this.setState({ sorting: true });
+
+        let i;
+        const [animations] = Merge(this.state.array);
+        for (i = 0; i < animations.length; i++) {
+            const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
+            const arrayBars = document.getElementsByClassName('Bar');
+            if (isColorChange === true) {
+                const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
+                const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                const barOneStyle = arrayBars[barOneIndex].style;
+                const barTwoStyle = arrayBars[barTwoIndex].style;
+                setTimeout(() => {
+                    barOneStyle.backgroundColor = color;
+                    barTwoStyle.backgroundColor = color;
+                }, i * this.state.Speed);
+            }
+            else {
+                const [swap, barIndex, newHeight] = animations[i];
+                if (barIndex === -1) {
+                    continue;
+                }
+                const barStyle = arrayBars[barIndex].style;
+                setTimeout(() => {
+                    barStyle.height = `${newHeight}px`;
+                }, i * this.state.Speed);
+            }
+        }
+
+        setTimeout(() => {
+            this.setState({ sorting: false });
+        }, i * this.state.Speed);
 
     }
 
@@ -185,7 +224,7 @@ class Chart extends Component {
                         Reset
                     </button>
                     <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.07s" }} onClick={this.Bubble_Sort}>Bubble-Sort</button>
-                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.14s" }} onClick={this.Bubble_Sort}>Merge-Sort</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.14s" }} onClick={this.Merge_Sort}>Merge-Sort</button>
                     <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.21s" }} onClick={this.Insertion_Sort}>Insertion Sort</button>
                     <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.28s" }} onClick={this.Selction_Sort}>Selection Sort</button>
                     <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.35s" }} onClick={this.handleIncrease}>Speed +</button>
