@@ -181,14 +181,15 @@ class Chart extends Component {
         return (
             <div className="main" >
                 <div className="buttons" >
-                    <button disabled={this.state.sorting} title="Generates a new random array" className="button" onClick={this.resetArray}>
+                    <button disabled={this.state.sorting} title="Generates a new random array" className="button bouncy" onClick={this.resetArray}>
                         Reset
                     </button>
-                    <button disabled={this.state.sorting} className="button" onClick={this.Bubble_Sort}>Bubble-Sort</button>
-                    <button disabled={this.state.sorting} className="button" onClick={this.Insertion_Sort}>Insertion Sort</button>
-                    <button disabled={this.state.sorting} className="button" onClick={this.Selction_Sort}>Selection Sort</button>
-                    <button disabled={this.state.sorting} className="button" onClick={this.handleIncrease}>Speed +</button>
-                    <button disabled={this.state.sorting} className="button" onClick={this.handleDecrease}>Speed -</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.07s" }} onClick={this.Bubble_Sort}>Bubble-Sort</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.14s" }} onClick={this.Bubble_Sort}>Merge-Sort</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.21s" }} onClick={this.Insertion_Sort}>Insertion Sort</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.28s" }} onClick={this.Selction_Sort}>Selection Sort</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.35s" }} onClick={this.handleIncrease}>Speed +</button>
+                    <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.42s" }} onClick={this.handleDecrease}>Speed -</button>
                 </div>
                 <div className="Chart">
                     {Object}
