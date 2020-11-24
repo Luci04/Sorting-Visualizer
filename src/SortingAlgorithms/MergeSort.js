@@ -43,7 +43,7 @@ function merge(auxillaryArray, startIndex, middleIndex, endIndex, animations) {
     }
     for (let i = startIndex; i <= endIndex; i++) {
         animations.push(["comparision1", i, i - startIndex]);
-        animations.push(["overwrite", i, sortArray[i - startIndex]]);
+        animations.push([i, sortArray[i - startIndex]]);
         animations.push(["comparision2", i, i - startIndex]);
         auxillaryArray[i] = sortArray[i - startIndex];
     }

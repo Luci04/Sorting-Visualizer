@@ -1,6 +1,6 @@
 import React from 'react'
 import Bar from './Bar';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { SortableContainer } from 'react-sortable-hoc';
 
 
 function DraggbleBars({ array }) {
@@ -13,16 +13,4 @@ function DraggbleBars({ array }) {
 }
 
 export default SortableContainer(DraggbleBars);
-
-// export default class Table {
-//     render() {
-
-
-//         return (
-
-//             
-//         )
-
-//     }
-// }
 

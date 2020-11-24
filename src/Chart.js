@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Bar from './Bar';
-import "./Chart.css";
 import { BubbleSort } from './SortingAlgorithms/BubbleSort';
 import { Selection } from './SortingAlgorithms/SelectionSort';
 import { Insertion } from './SortingAlgorithms/InsertionSort';
 import { Merge } from './SortingAlgorithms/MergeSort';
 import Table from './Table';
 import arrayMove from 'array-move';
+import "./Chart.css";
 
 const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
@@ -50,8 +49,9 @@ class Chart extends Component {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
                 const arrayBars = document.getElementsByClassName('Bar');
                 if (isColorChange === true) {
-                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const [comparision, barOneIndex, barTwoIndex] = animations[i];
+
+                    const color = (comparision === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const barOneStyle = arrayBars[barOneIndex].style;
                     const barTwoStyle = arrayBars[barTwoIndex].style;
                     setTimeout(() => {
@@ -60,7 +60,7 @@ class Chart extends Component {
                     }, i * this.state.Speed);
                 }
                 else {
-                    const [swap, barIndex, newHeight] = animations[i];
+                    const [barIndex, newHeight] = animations[i];
                     if (barIndex === -1) {
                         continue;
                     }
@@ -96,8 +96,8 @@ class Chart extends Component {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
                 const arrayBars = document.getElementsByClassName('Bar');
                 if (isColorChange === true) {
-                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const color = (comparision === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const barOneStyle = arrayBars[barOneIndex].style;
                     const barTwoStyle = arrayBars[barTwoIndex].style;
                     setTimeout(() => {
@@ -106,7 +106,7 @@ class Chart extends Component {
                     }, i * this.state.Speed);
                 }
                 else {
-                    const [swap, barIndex, newHeight] = animations[i];
+                    const [barIndex, newHeight] = animations[i];
                     if (barIndex === -1) {
                         continue;
                     }
@@ -141,8 +141,8 @@ class Chart extends Component {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
                 const arrayBars = document.getElementsByClassName('Bar');
                 if (isColorChange === true) {
-                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const color = (comparision === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const barOneStyle = arrayBars[barOneIndex].style;
                     const barTwoStyle = arrayBars[barTwoIndex].style;
                     setTimeout(() => {
@@ -151,7 +151,7 @@ class Chart extends Component {
                     }, i * this.state.Speed);
                 }
                 else {
-                    const [swap, barIndex, newHeight] = animations[i];
+                    const [barIndex, newHeight] = animations[i];
                     if (barIndex === -1) {
                         continue;
                     }
@@ -171,17 +171,6 @@ class Chart extends Component {
 
     }
 
-    arraysAreEqual(firstArray, secondArray) {
-        if (firstArray.length !== secondArray.length) {
-            return false;
-        }
-        for (let i = 0; i < firstArray.length; i++) {
-            if (firstArray[i] !== secondArray[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     Selction_Sort() {
 
@@ -198,8 +187,8 @@ class Chart extends Component {
                 const isColorChange = animations[i][0] === "comparision1" || animations[i][0] === "comparision2";
                 const arrayBars = document.getElementsByClassName('Bar');
                 if (isColorChange === true) {
-                    const color = (animations[i][0] === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const [comparision, barOneIndex, barTwoIndex] = animations[i];
+                    const color = (comparision === "comparision1") ? SECONDARY_COLOR : PRIMARY_COLOR;
                     const barOneStyle = arrayBars[barOneIndex].style;
                     const barTwoStyle = arrayBars[barTwoIndex].style;
                     setTimeout(() => {
@@ -208,7 +197,7 @@ class Chart extends Component {
                     }, i * this.state.Speed);
                 }
                 else {
-                    const [swap, barIndex, newHeight] = animations[i];
+                    const [barIndex, newHeight] = animations[i];
                     if (barIndex === -1) {
                         continue;
                     }
@@ -260,13 +249,25 @@ class Chart extends Component {
         this.setState({ array: arr });
     }
 
+    arraysAreEqual(firstArray, secondArray) {
+        if (firstArray.length !== secondArray.length) {
+            return false;
+        }
+        for (let i = 0; i < firstArray.length; i++) {
+            if (firstArray[i] !== secondArray[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     componentDidMount() {
         this.resetArray();
     }
 
     render() {
 
-        let Object = this.state.array.map((e, index) => <div className="array-bar"><Bar height={e} key={index} left={index * 20} /></div>)
 
         return (
             <div className="main" >

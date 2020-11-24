@@ -17,8 +17,8 @@ function bubbleSort(auxillaryArray, animations) {
             animations.push(["comparision2", i, i + 1]);
             if (auxillaryArray[i] > auxillaryArray[i + 1]) {
                 swapped = true;
-                animations.push(["swap", i, auxillaryArray[i + 1]]);
-                animations.push(["swap", i + 1, auxillaryArray[i]]);
+                animations.push([i, auxillaryArray[i + 1]]);
+                animations.push([i + 1, auxillaryArray[i]]);
                 swap(auxillaryArray, i, i + 1);
             }
         }

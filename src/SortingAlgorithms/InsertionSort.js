@@ -14,7 +14,7 @@ function insertionSort(auxillaryArray, animations) {
         animations.push(["comparision1", j, i]);
         animations.push(["comparision2", j, i]);
         while (j >= 0 && auxillaryArray[j] > key) {
-            animations.push(['overwrite', j + 1, auxillaryArray[j]]);
+            animations.push([j + 1, auxillaryArray[j]]);
             auxillaryArray[j + 1] = auxillaryArray[j];
             j--;
             if (j >= 0) {
@@ -22,14 +22,9 @@ function insertionSort(auxillaryArray, animations) {
                 animations.push(['comparision2', j, i]);
             }
 
-            animations.push(['overwrite', j + 1, key]);
+            animations.push([j + 1, key]);
             auxillaryArray[j + 1] = key;
         }
     }
 }
 
-function swap(auxillaryArray, firstIndex, secondIndex) {
-    let temp = auxillaryArray[firstIndex];
-    auxillaryArray[firstIndex] = auxillaryArray[secondIndex];
-    auxillaryArray[secondIndex] = temp;
-}
