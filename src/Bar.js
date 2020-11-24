@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "./Bar.css";
+import { SortableElement } from 'react-sortable-hoc';
 
 class Bar extends Component {
 
@@ -10,4 +11,4 @@ class Bar extends Component {
     }
 }
 
-export default Bar
+export default SortableElement(Bar);

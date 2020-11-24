@@ -5,6 +5,8 @@ import { BubbleSort } from './SortingAlgorithms/BubbleSort';
 import { Selection } from './SortingAlgorithms/SelectionSort';
 import { Insertion } from './SortingAlgorithms/InsertionSort';
 import { Merge } from './SortingAlgorithms/MergeSort';
+import Table from './Table';
+import arrayMove from 'array-move';
 
 const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
@@ -16,11 +18,22 @@ class Chart extends Component {
         this.Selction_Sort = this.Selction_Sort.bind(this);
         this.Insertion_Sort = this.Insertion_Sort.bind(this);
         this.Merge_Sort = this.Merge_Sort.bind(this);
-        this.state = { array: [], length: 70, Speed: 50, sorting: false };
+        this.state = { array: [], length: 66, Speed: 50, sorting: false };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.handleDecrease = this.handleDecrease.bind(this);
     }
+
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        if (this.state.sorting === false) {
+            this.setState(({ array }) => ({
+                array: arrayMove(array, oldIndex, newIndex),
+            }));
+        } else {
+            alert("Sorting Process is Running!!!")
+        }
+
+    };
 
     Bubble_Sort() {
 
@@ -269,9 +282,13 @@ class Chart extends Component {
                     <button disabled={this.state.sorting} className="button bouncy" style={{ "animation-delay": "0.42s" }} onClick={this.handleDecrease}>Speed -</button>
                 </div>
                 <div className="Chart">
-                    {Object}
-                </div >
-            </div >
+                    <Table
+                        axis="x"
+                        array={this.state.array}
+                        onSortEnd={this.onSortEnd}
+                    />
+                </div>
+            </div>
 
         )
     }
