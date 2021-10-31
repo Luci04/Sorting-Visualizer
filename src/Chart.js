@@ -11,13 +11,15 @@ const PRIMARY_COLOR = 'blue';
 const SECONDARY_COLOR = 'red';
 
 class Chart extends Component {
+
+
     constructor(props) {
         super(props);
         this.Bubble_Sort = this.Bubble_Sort.bind(this);
         this.Selction_Sort = this.Selction_Sort.bind(this);
         this.Insertion_Sort = this.Insertion_Sort.bind(this);
         this.Merge_Sort = this.Merge_Sort.bind(this);
-        this.state = { array: [], length: 66, Speed: 50, sorting: false };
+        this.state = { array: [], length: 50, Speed: 50, sorting: false };
         this.resetArray = this.resetArray.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.handleDecrease = this.handleDecrease.bind(this);
@@ -221,7 +223,7 @@ class Chart extends Component {
         let x = this.state.Speed;
         if (x > 1) {
             this.setState(prev => ({
-                Speed: prev.Speed - 20
+                Speed: prev.Speed - 30
             }))
         } else {
             alert("Cannot get Faster than this")
@@ -233,7 +235,7 @@ class Chart extends Component {
         let x = this.state.Speed;
         if (x < 110) {
             this.setState(prev => ({
-                Speed: prev.Speed + 20
+                Speed: prev.Speed + 30
             }))
         } else {
             alert("Sry Slower than this is not possible");
@@ -243,7 +245,7 @@ class Chart extends Component {
     resetArray() {
         const arr = [];
         for (let index = 0; index < this.state.length; index++) {
-            let element = Math.floor(Math.random() * 800) + 100;
+            let element = Math.floor(Math.random() * 500) + 100;
             arr[index] = element;
         }
         this.setState({ array: arr });
